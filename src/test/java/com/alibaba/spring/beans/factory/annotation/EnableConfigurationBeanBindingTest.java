@@ -27,10 +27,10 @@ import com.alibaba.spring.context.config.ConfigurationBeanBinder;
 import com.alibaba.spring.context.config.ConfigurationBeanCustomizer;
 import com.alibaba.spring.context.config.DefaultConfigurationBeanBinder;
 import com.alibaba.spring.util.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Bean;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @EnableConfigurationBeanBinding(prefix = "usr", type = User.class)

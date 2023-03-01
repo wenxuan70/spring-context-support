@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
+import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.EnvironmentAware;
@@ -73,8 +73,8 @@ import static org.springframework.core.GenericTypeResolver.resolveTypeArgument;
  * @since 1.0.3
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractAnnotationBeanPostProcessor extends
-        InstantiationAwareBeanPostProcessorAdapter implements MergedBeanDefinitionPostProcessor, PriorityOrdered,
+public abstract class AbstractAnnotationBeanPostProcessor implements SmartInstantiationAwareBeanPostProcessor,
+        MergedBeanDefinitionPostProcessor, PriorityOrdered,
         BeanFactoryAware, BeanClassLoaderAware, EnvironmentAware, DisposableBean {
 
     private final static int CACHE_SIZE = Integer.getInteger("", 32);
@@ -171,8 +171,8 @@ public abstract class AbstractAnnotationBeanPostProcessor extends
     }
 
     @Override
-    public PropertyValues postProcessPropertyValues(
-            PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeanCreationException {
+    public PropertyValues postProcessProperties(
+            PropertyValues pvs, Object bean, String beanName) throws BeanCreationException {
 
         InjectionMetadata metadata = findInjectionMetadata(beanName, bean.getClass(), pvs);
         try {

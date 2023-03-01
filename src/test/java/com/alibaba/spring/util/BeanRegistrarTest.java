@@ -16,17 +16,17 @@
  */
 package com.alibaba.spring.util;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 import static com.alibaba.spring.util.BeanRegistrar.hasAlias;
 import static com.alibaba.spring.util.BeanRegistrar.registerInfrastructureBean;
 import static com.alibaba.spring.util.BeanRegistrar.registerSpringFactoriesBeans;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRASTRUCTURE;
 
 /**
@@ -40,7 +40,7 @@ public class BeanRegistrarTest {
 
     private DefaultListableBeanFactory registry;
 
-    @Before
+    @BeforeEach
     public void init() {
         registry = new DefaultListableBeanFactory();
     }

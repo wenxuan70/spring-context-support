@@ -1,7 +1,8 @@
 package com.alibaba.spring.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link FieldUtils} Test
@@ -23,23 +24,23 @@ public class FieldUtilsTest {
 
         int hash = FieldUtils.getFieldValue(test, "hash", int.class);
 
-        Assert.assertEquals(hashCode, hash);
+        assertEquals(hashCode, hash);
 
         hash = FieldUtils.getFieldValue(test, "hash");
 
-        Assert.assertEquals(hashCode, hash);
+        assertEquals(hashCode, hash);
 
         FieldUtilsTest instance = new FieldUtilsTest();
 
         hash = FieldUtils.getFieldValue(instance, "data", 2);
 
-        Assert.assertEquals(2, hash);
+        assertEquals(2, hash);
 
         instance.data = 1;
 
         hash = FieldUtils.getFieldValue(instance, "data", 2);
 
-        Assert.assertEquals(1, hash);
+        assertEquals(1, hash);
 
     }
 }

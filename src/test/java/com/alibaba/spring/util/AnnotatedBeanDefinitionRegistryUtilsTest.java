@@ -1,11 +1,13 @@
 package com.alibaba.spring.util;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.util.ObjectUtils;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link AnnotatedBeanDefinitionRegistryUtils} Test
@@ -18,7 +20,7 @@ public class AnnotatedBeanDefinitionRegistryUtilsTest {
 
     private DefaultListableBeanFactory registry = null;
 
-    @Before
+    @BeforeEach
     public void init() {
         registry = new DefaultListableBeanFactory();
         registry.setAllowBeanDefinitionOverriding(false);
@@ -34,11 +36,11 @@ public class AnnotatedBeanDefinitionRegistryUtilsTest {
 
         String[] beanNames = registry.getBeanNamesForType(this.getClass());
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanNames = registry.getBeanNamesForType(AnnotatedBeanDefinitionRegistryUtils.class);
 
-        Assert.assertTrue(ObjectUtils.isEmpty(beanNames));
+        assertTrue(ObjectUtils.isEmpty(beanNames));
 
         AnnotatedBeanDefinitionRegistryUtils.registerBeans(registry);
 
@@ -49,19 +51,19 @@ public class AnnotatedBeanDefinitionRegistryUtilsTest {
 
         int count = AnnotatedBeanDefinitionRegistryUtils.scanBasePackages(registry, getClass().getPackage().getName());
 
-        Assert.assertEquals(5, count);
+        assertEquals(5, count);
 
         String[] beanNames = registry.getBeanNamesForType(TestBean.class);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanNames = registry.getBeanNamesForType(TestBean2.class);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         count = AnnotatedBeanDefinitionRegistryUtils.scanBasePackages(registry);
 
-        Assert.assertEquals(0, count);
+        assertEquals(0, count);
     }
 
 }

@@ -17,9 +17,8 @@
 package com.alibaba.spring.beans.factory.annotation;
 
 import com.alibaba.spring.util.User;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,14 +28,17 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * {@link AbstractAnnotationBeanPostProcessor} Test
  *
  * @since 1.0.3
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
         AnnotationInjectedBeanPostProcessorTest.TestConfiguration.class,
         AbstractAnnotationBeanPostProcessorTest.ReferencedAnnotationInjectedBeanPostProcessor.class,
@@ -71,26 +73,26 @@ public class AbstractAnnotationBeanPostProcessorTest {
     @Test
     public void testCustomizedAnnotationBeanPostProcessor() {
 
-        Assert.assertEquals(environment, processor.getEnvironment());
-        Assert.assertEquals(beanFactory.getBeanClassLoader(), processor.getClassLoader());
-        Assert.assertEquals(beanFactory, processor.getBeanFactory());
+        assertEquals(environment, processor.getEnvironment());
+        assertEquals(beanFactory.getBeanClassLoader(), processor.getClassLoader());
+        assertEquals(beanFactory, processor.getBeanFactory());
 
-        Assert.assertEquals(AnnotationInjectedBeanPostProcessorTest.Referenced.class, processor.getAnnotationType());
-        Assert.assertEquals(1, processor.getInjectedObjects().size());
-        Assert.assertTrue(processor.getInjectedObjects().contains(parent.parentUser));
-        Assert.assertEquals(3, processor.getInjectedFieldObjectsMap().size());
-        Assert.assertEquals(1, processor.getInjectedMethodObjectsMap().size());
-        Assert.assertEquals(Ordered.LOWEST_PRECEDENCE - 3, processor.getOrder());
+        assertEquals(AnnotationInjectedBeanPostProcessorTest.Referenced.class, processor.getAnnotationType());
+        assertEquals(1, processor.getInjectedObjects().size());
+        assertTrue(processor.getInjectedObjects().contains(parent.parentUser));
+        assertEquals(3, processor.getInjectedFieldObjectsMap().size());
+        assertEquals(1, processor.getInjectedMethodObjectsMap().size());
+        assertEquals(Ordered.LOWEST_PRECEDENCE - 3, processor.getOrder());
     }
 
     @Test
     public void testReferencedUser() {
-        Assert.assertEquals("mercyblitz", parent.user.getName());
-        Assert.assertEquals(32, parent.user.getAge());
-        Assert.assertEquals(parent.user, parent.parentUser);
-        Assert.assertEquals(parent.user, child.childUser);
-        Assert.assertEquals(parent.user, userHolder.user);
-        Assert.assertEquals(parent.user, genericChild.getS());
+        assertEquals("mercyblitz", parent.user.getName());
+        assertEquals(32, parent.user.getAge());
+        assertEquals(parent.user, parent.parentUser);
+        assertEquals(parent.user, child.childUser);
+        assertEquals(parent.user, userHolder.user);
+        assertEquals(parent.user, genericChild.getS());
     }
 
     public static class ReferencedAnnotationInjectedBeanPostProcessor extends AbstractAnnotationBeanPostProcessor {

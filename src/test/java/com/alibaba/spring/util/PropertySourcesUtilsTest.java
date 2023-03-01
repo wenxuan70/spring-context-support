@@ -1,6 +1,6 @@
 package com.alibaba.spring.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.alibaba.spring.util.PropertySourcesUtils.getSubProperties;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link PropertySourcesUtils} Test

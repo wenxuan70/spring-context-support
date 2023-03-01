@@ -2,12 +2,11 @@ package com.alibaba.spring.beans.factory.config;
 
 import com.alibaba.spring.util.Bean;
 import com.alibaba.spring.util.TestBean;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeansException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * {@link GenericBeanPostProcessorAdapter} Test
@@ -92,8 +91,8 @@ public class GenericBeanPostProcessorAdapterTest {
 
         String bean = "test";
 
-        Assert.assertEquals("test", beanPostProcessor.postProcessBeforeInitialization(bean, ""));
-        Assert.assertEquals("test", beanPostProcessor.postProcessAfterInitialization(bean, ""));
+        assertEquals("test", beanPostProcessor.postProcessBeforeInitialization(bean, ""));
+        assertEquals("test", beanPostProcessor.postProcessAfterInitialization(bean, ""));
     }
 
     @Test

@@ -16,13 +16,12 @@
  */
 package com.alibaba.spring.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static com.alibaba.spring.util.ObjectUtils.of;
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * {@link ObjectUtils} Test
@@ -35,8 +34,8 @@ public class ObjectUtilsTest {
     @Test
     public void testOf() {
         String[] values = of("Hello,World");
-        Assert.assertTrue(Arrays.deepEquals(values, new String[]{"Hello,World"}));
-        Assert.assertFalse(Arrays.deepEquals(values, new String[]{"Hello,World   "}));
+        assertTrue(Arrays.deepEquals(values, new String[]{"Hello,World"}));
+        assertFalse(Arrays.deepEquals(values, new String[]{"Hello,World   "}));
     }
 
     @Test

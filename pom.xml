@@ -15,9 +15,9 @@
     <version>1.0.11</version>
 
     <properties>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <spring.framework.version>3.2.18.RELEASE</spring.framework.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring.framework.version>6.0.5</spring.framework.version>
     </properties>
 
     <scm>
@@ -51,9 +51,9 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
 

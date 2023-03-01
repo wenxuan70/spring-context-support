@@ -1,7 +1,6 @@
 package com.alibaba.spring.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -22,8 +21,7 @@ import static com.alibaba.spring.util.AnnotatedBeanDefinitionRegistryUtils.regis
 import static com.alibaba.spring.util.BeanUtils.getBeanIfAvailable;
 import static com.alibaba.spring.util.BeanUtils.getBeanNames;
 import static com.alibaba.spring.util.BeanUtils.isBeanPresent;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.util.ClassUtils.isAssignable;
 
 /**
@@ -54,19 +52,19 @@ public class BeanUtilsTest {
 
         Class<?> beanType = BeanUtils.resolveBeanType(this.getClass().getName(), classLoader);
 
-        Assert.assertEquals(beanType, this.getClass());
+        assertEquals(beanType, this.getClass());
 
         beanType = BeanUtils.resolveBeanType("", classLoader);
 
-        Assert.assertNull(beanType);
+        assertNull(beanType);
 
         beanType = BeanUtils.resolveBeanType("     ", classLoader);
 
-        Assert.assertNull(beanType);
+        assertNull(beanType);
 
         beanType = BeanUtils.resolveBeanType("java.lang.Abc", classLoader);
 
-        Assert.assertNull(beanType);
+        assertNull(beanType);
 
     }
 
@@ -93,7 +91,7 @@ public class BeanUtilsTest {
 
         String[] beanNames = getBeanNames(context, User.class);
 
-        Assert.assertTrue(Arrays.asList(beanNames).contains("user"));
+        assertTrue(Arrays.asList(beanNames).contains("user"));
 
         context.close();
 
@@ -116,74 +114,74 @@ public class BeanUtilsTest {
 
         String[] beanNames = getBeanNames(listableBeanFactory, TestBean.class);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         String beanName = beanNames[0];
 
-        Assert.assertEquals("testBean", beanName);
+        assertEquals("testBean", beanName);
 
         beanNames = getBeanNames(listableBeanFactory, TestBean.class, true);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean", beanName);
+        assertEquals("testBean", beanName);
 
         listableBeanFactory = beanFactory;
 
         beanNames = getBeanNames(listableBeanFactory, TestBean.class);
 
-        Assert.assertEquals(0, beanNames.length);
+        assertEquals(0, beanNames.length);
 
         beanNames = getBeanNames(listableBeanFactory, TestBean.class, true);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean", beanName);
+        assertEquals("testBean", beanName);
 
         beanNames = getBeanNames(listableBeanFactory, TestBean2.class, true);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean2", beanName);
+        assertEquals("testBean2", beanName);
 
         beanNames = getBeanNames(listableBeanFactory, com.alibaba.spring.util.Bean.class, true);
 
-        Assert.assertEquals(2, beanNames.length);
+        assertEquals(2, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean2", beanName);
+        assertEquals("testBean2", beanName);
 
         beanName = beanNames[1];
 
-        Assert.assertEquals("testBean", beanName);
+        assertEquals("testBean", beanName);
 
 
         beanNames = getBeanNames(beanFactory, com.alibaba.spring.util.Bean.class, true);
 
-        Assert.assertEquals(2, beanNames.length);
+        assertEquals(2, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean2", beanName);
+        assertEquals("testBean2", beanName);
 
         beanName = beanNames[1];
 
-        Assert.assertEquals("testBean", beanName);
+        assertEquals("testBean", beanName);
 
         beanNames = getBeanNames(beanFactory, com.alibaba.spring.util.Bean.class);
 
-        Assert.assertEquals(1, beanNames.length);
+        assertEquals(1, beanNames.length);
 
         beanName = beanNames[0];
 
-        Assert.assertEquals("testBean2", beanName);
+        assertEquals("testBean2", beanName);
 
 
     }
@@ -231,17 +229,17 @@ public class BeanUtilsTest {
 
         TestBean testBean = BeanUtils.getOptionalBean(registry, TestBean.class, true);
 
-        Assert.assertNull(testBean);
+        assertNull(testBean);
 
         testBean = BeanUtils.getOptionalBean(registry, TestBean.class);
 
-        Assert.assertNull(testBean);
+        assertNull(testBean);
 
         registerBeans(registry, TestBean.class);
 
         testBean = BeanUtils.getOptionalBean(registry, TestBean.class);
 
-        Assert.assertNotNull(testBean);
+        assertNotNull(testBean);
 
     }
 
@@ -254,15 +252,15 @@ public class BeanUtilsTest {
 
         List<com.alibaba.spring.util.Bean> beans = BeanUtils.getSortedBeans(registry, com.alibaba.spring.util.Bean.class);
 
-        Assert.assertEquals(2, beans.size());
+        assertEquals(2, beans.size());
 
         TestBean testBean = BeanUtils.getOptionalBean(registry, TestBean.class);
 
-        Assert.assertEquals(testBean, beans.get(0));
+        assertEquals(testBean, beans.get(0));
 
         TestBean2 testBean2 = BeanUtils.getOptionalBean(registry, TestBean2.class);
 
-        Assert.assertEquals(testBean2, beans.get(1));
+        assertEquals(testBean2, beans.get(1));
 
     }
 
@@ -299,7 +297,7 @@ public class BeanUtilsTest {
 
         Map<String, OrderedBean> sortedBeansMap = BeanUtils.sort(orderedBeansMap);
 
-        Assert.assertArrayEquals(expectedBeansMap.values().toArray(), sortedBeansMap.values().toArray());
+        assertArrayEquals(expectedBeansMap.values().toArray(), sortedBeansMap.values().toArray());
 
     }
 
@@ -349,10 +347,10 @@ public class BeanUtilsTest {
 
         AnnotationAwareOrderComparator.sort(namingBeans);
 
-        Assert.assertEquals(1, namingBean.getOrder());
-        Assert.assertEquals(2, namingBean2.getOrder());
+        assertEquals(1, namingBean.getOrder());
+        assertEquals(2, namingBean2.getOrder());
 
-        Assert.assertEquals(-1, namingBean.compareTo(namingBean2));
+        assertEquals(-1, namingBean.compareTo(namingBean2));
 
 
     }
